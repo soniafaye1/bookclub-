@@ -10,7 +10,7 @@ const Book = db.define("book", {
     type: Sequelize.STRING,
   },
   description: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
   },
   contributer: {
     type: Sequelize.STRING,

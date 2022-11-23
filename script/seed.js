@@ -75,11 +75,11 @@ async function seed() {
       murphy: users[1],
     },
     books: {
-      books: books[0],
-      books: books[1],
-      books: books[2],
-      books: books[3],
-      books: books[4],
+      "Wuthering Heights": books[0],
+      "Ethan Frome": books[1],
+      "Importance of Being Earnest": books[2],
+      "Anna Karenina": books[3],
+      "Cyrano de Bergerac": books[4],
     },
   };
 }
