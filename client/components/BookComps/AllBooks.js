@@ -1,20 +1,28 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { connect, useSelector } from "react-redux";
-import { fetchBooks, fetchCreateBook } from "../store/books";
+import { fetchBooks, fetchCreateBook } from "../../store/books";
 
 export class AllBooks extends React.Component {
   constructor(props) {
     super(props);
   }
 
+  componentDidMount() {
+    this.props.fetchBooks();
+  }
+
   render() {
     const books = this.props.books || [];
     return (
       <div>
-        {books.map((book) => {
+        <h3>Book Titles</h3>
+        {books.map((book, idx) => {
           return (
-            <div>
-              <h2>{book.title}</h2>
+            <div key={idx}>
+              <Link to={`/books/${book.id}`}>
+                <p>{book.title}</p>
+              </Link>
             </div>
           );
         })}
@@ -34,8 +42,8 @@ const mapState = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getBooks: (book) => dispatch(fetchBooks(book)),
-    createBook: (book) => dispatch(fetchCreateBook(book)),
+    fetchBooks: (book) => dispatch(fetchBooks(book)),
+    fetchCreatedBook: (book) => dispatch(fetchCreateBook(book)),
   };
 };
 

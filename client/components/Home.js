@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchBooks, fetchCreateBook } from "../store/books";
-import AllBooks from "./AllBooks";
+import AllBooks from "./BookComps/AllBooks";
 
 /**
  * COMPONENT
@@ -11,8 +10,8 @@ export const Home = (props) => {
 
   return (
     <div>
-      <h3>Welcome, {username}</h3>
-      <AllBooks match={props.match} />
+      <h2>Welcome, {username}</h2>
+      <AllBooks />
     </div>
   );
 };

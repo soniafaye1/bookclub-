@@ -4,7 +4,7 @@ const {
 } = require("../db");
 module.exports = router;
 
-//get all books
+//get all /api/books
 router.get("/", async (req, res, next) => {
   try {
     const books = await Book.findAll();
@@ -34,11 +34,11 @@ router.get("/:id", async (req, res, next) => {
 });
 
 //delete specific book
-router.delete("/:id", async (res, req, next) => {
-  try {
-    const book = await Book.findByPk(req.params.id);
-    await book.destroy();
-  } catch (err) {
-    next(err);
-  }
-});
+// router.delete("/:id", async (res, req, next) => {
+//   try {
+//     const book = await Book.findByPk(req.params.id);
+//     await book.destroy();
+//   } catch (err) {
+//     next(err);
+//   }
+// });
