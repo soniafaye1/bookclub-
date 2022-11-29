@@ -4,6 +4,7 @@ import { withRouter, Route, Switch, Redirect } from "react-router-dom";
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
 import SingleBook from "./components/BookComps/SingleBook";
+import Profile from "./components/Profile";
 import { me } from "./store";
 
 /**
@@ -23,6 +24,7 @@ class Routes extends Component {
           <Switch>
             <Route path="/home" component={Home} />
             <Route path="/books/:id" component={SingleBook} />
+            <Route path="/users/:username" component={Profile} />
             <Redirect to="/home" />
           </Switch>
         ) : (

@@ -17,6 +17,10 @@ export class SingleBook extends React.Component {
         <h2>Single Book Info</h2>
         <p>{book.title}</p>
         <p>{book.author}</p>
+        <div>
+          <p>{book.published_date}</p>
+          <p>{book.description}</p>
+        </div>
       </div>
     );
   }
