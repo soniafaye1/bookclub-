@@ -2,7 +2,7 @@
 
 const {
   db,
-  models: { User, Book },
+  models: { User, Book, Review },
 } = require("../server/db");
 
 /**
@@ -14,12 +14,12 @@ async function seed() {
   console.log("db synced!");
 
   // Creating Users
-  const users = await Promise.all([
+  const [user1, user2] = await Promise.all([
     User.create({ username: "cody", password: "123" }),
     User.create({ username: "murphy", password: "123" }),
   ]);
 
-  const books = await Promise.all([
+  const [book1, book2, book3, book4, book5] = await Promise.all([
     Book.create({
       title: "Wuthering Heights",
       published_date: "1847",
@@ -67,21 +67,58 @@ async function seed() {
     }),
   ]);
 
-  console.log(`seeded ${users.length} users. seeded ${books.length} books`);
+  const reviews = await Promise.all([
+    Review.create({
+      title: "This was Ok",
+      content: "dont remember, dont care",
+      rating: 3.0,
+      userId: user1.id,
+      bookId: book1.id,
+    }),
+    Review.create({
+      title: "Ethan Frown",
+      content: "lmao no idea",
+      rating: 2.5,
+      userId: user1.id,
+      bookId: book2.id,
+    }),
+    Review.create({
+      title: "",
+      content: "yada yada yada",
+      rating: 2.0,
+      userId: user2.id,
+      bookId: book3.id,
+    }),
+    Review.create({
+      title: "Anna Can Get It",
+      content: "pretty good",
+      rating: 4.5,
+      userId: user2.id,
+      bookId: book4.id,
+    }),
+    Review.create({
+      title: "Great Book",
+      content: "Love me some cyrano. a classic",
+      rating: 5.0,
+      userId: user1.id,
+      bookId: book5.id,
+    }),
+  ]);
+
   console.log(`seeded successfully`);
-  return {
-    users: {
-      cody: users[0],
-      murphy: users[1],
-    },
-    books: {
-      "Wuthering Heights": books[0],
-      "Ethan Frome": books[1],
-      "Importance of Being Earnest": books[2],
-      "Anna Karenina": books[3],
-      "Cyrano de Bergerac": books[4],
-    },
-  };
+  // return {
+  //   users: {
+  //     cody: users[0],
+  //     murphy: users[1],
+  //   },
+  //   books: {
+  //     "Wuthering Heights": books[0],
+  //     "Ethan Frome": books[1],
+  //     "Importance of Being Earnest": books[2],
+  //     "Anna Karenina": books[3],
+  //     "Cyrano de Bergerac": books[4],
+  //   },
+  // };
 }
 
 /*
