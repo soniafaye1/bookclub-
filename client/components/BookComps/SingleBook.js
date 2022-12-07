@@ -1,6 +1,7 @@
 import React from "react";
 import { connect, useSelector } from "react-redux";
 import { fetchBook } from "../../store/book";
+import Reviews from "../Reviews";
 
 export class SingleBook extends React.Component {
   constructor(props) {
@@ -20,6 +21,10 @@ export class SingleBook extends React.Component {
         <div>
           <p>{book.published_date}</p>
           <p>{book.description}</p>
+        </div>
+        <div>
+          <p>Reviews</p>
+          <Reviews />
         </div>
       </div>
     );

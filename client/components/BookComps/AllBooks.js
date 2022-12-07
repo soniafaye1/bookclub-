@@ -16,12 +16,12 @@ export class AllBooks extends React.Component {
     const books = this.props.books || [];
     return (
       <div>
-        <h3>Book Titles</h3>
+        <p className="subtitle">New This Week</p>
         {books.map((book, idx) => {
           return (
             <div key={idx}>
               <Link to={`/books/${book.id}`}>
-                <p>{book.title}</p>
+                <p className="bookBox">{book.title}</p>
               </Link>
             </div>
           );
