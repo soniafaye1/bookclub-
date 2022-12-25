@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchUser } from "../../store/user";
+import EditProfile from "./EditProfile";
 
 export class Profile extends React.Component {
   constructor(props) {
@@ -23,11 +24,14 @@ export class Profile extends React.Component {
         <h2>Profile</h2>
 
         <div>
-          <p>Name: {user.firstName}</p>
+          <p>Name: {user.name}</p>
           <p>Username: {user.username}</p>
           <p>Email: {user.email}</p>
           <p>Bio: {user.bio}</p>
         </div>
+
+        {/* <EditProfile /> */}
+
         <div>
           <Link to="/home">
             <p>Back to Home</p>
