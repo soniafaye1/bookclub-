@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 const db = require("../db");
 
-const userBook = db.define("userBook", {
+const UserBook = db.define("userBook", {
   status: {
     type: Sequelize.ENUM(["TBR", "Reading", "Read"]),
   },
@@ -11,4 +11,4 @@ const userBook = db.define("userBook", {
   },
 });
 
-module.exports = userBook;
+module.exports = UserBook;

@@ -5,6 +5,7 @@ const db = require("./db");
 const User = require("./models/User");
 const Book = require("./models/Book");
 const Review = require("./models/Review");
+const UserBook = require("./models/UserBook");
 
 //associations
 User.belongsToMany(Book, { through: "userBook" });
@@ -22,7 +23,6 @@ module.exports = {
     User,
     Book,
     Review,
-    userBook,
-    bookReview,
+    UserBook,
   },
 };

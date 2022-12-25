@@ -2,9 +2,8 @@
 
 const {
   db,
-  models: { User, Book, Review },
+  models: { User, Book, Review, UserBook },
 } = require("../server/db");
-
 /**
  * seed - this function clears the database, updates tables to
  *      match the models, and populates the database.
@@ -15,8 +14,20 @@ async function seed() {
 
   // Creating Users
   const [user1, user2] = await Promise.all([
-    User.create({ username: "cody", password: "123" }),
-    User.create({ username: "murphy", password: "123" }),
+    User.create({
+      firstName: "Cody",
+      username: "codysaurous",
+      password: "123",
+      email: "cody@mail.com",
+      bio: "im cody lol",
+    }),
+    User.create({
+      firstName: "Murphy",
+      username: "murph",
+      password: "123",
+      email: "murph@mail.com",
+      bio: "pssy slay queen",
+    }),
   ]);
 
   const [book1, book2, book3, book4, book5] = await Promise.all([
@@ -45,7 +56,7 @@ async function seed() {
         "Set in England during the late Victorian era, the play's humour derives in part from characters maintaining fictitious identities to escape unwelcome social obligations. It is replete with witty dialogue and satirises some of the foibles and hypocrisy of late Victorian society. It has proved Wilde's most enduringly popular play.",
       contributer: "Oscar Wilde",
       author: "Oscar Wilde",
-      publisher: "Dover PUblications",
+      publisher: "Dover Publications",
     }),
     Book.create({
       title: "Anna Karénina",
@@ -64,6 +75,29 @@ async function seed() {
       contributer: "",
       author: "Edmond Rostand",
       publisher: "Penguin Books",
+    }),
+  ]);
+
+  const userBooks = await Promise.all([
+    UserBook.create({
+      userId: 1,
+      bookId: 1,
+      favorite: false,
+    }),
+    UserBook.create({
+      userId: 1,
+      bookId: 2,
+      favorite: true,
+    }),
+    UserBook.create({
+      userId: 2,
+      bookId: 3,
+      favorite: false,
+    }),
+    UserBook.create({
+      userId: 2,
+      bookId: 4,
+      favorite: true,
     }),
   ]);
 
