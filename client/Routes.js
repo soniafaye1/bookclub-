@@ -4,7 +4,7 @@ import { withRouter, Route, Switch, Redirect } from "react-router-dom";
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
 import SingleBook from "./components/BookComps/SingleBook";
-import Profile from "./components/Profile";
+import Profile from "./components/ProfileComps/Profile";
 import { me } from "./store";
 
 /**

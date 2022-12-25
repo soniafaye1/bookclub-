@@ -26,7 +26,7 @@ export class SingleBook extends React.Component {
         </div>
 
         <div>
-          <Link to="/books">
+          <Link to="/home">
             <p>Back to Home</p>
           </Link>
         </div>

@@ -18,6 +18,15 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.get("/:username", async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.id);
+    res.json(user);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.put("/:username", async (req, res, next) => {
   try {
     const user = await User.findOne({
@@ -29,7 +38,7 @@ router.put("/:username", async (req, res, next) => {
   }
 });
 
-router.delete("/id", async (req, res, next) => {
+router.delete("/:id", async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id);
     await user.destroy();

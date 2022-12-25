@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { fetchUser } from "../store/user";
+import { fetchUser } from "../../store/user";
 
 export class Profile extends React.Component {
   constructor(props) {
@@ -20,7 +21,18 @@ export class Profile extends React.Component {
     return (
       <div>
         <h2>Profile</h2>
-        <p>{user.username}</p>
+
+        <div>
+          <p>Name: {user.firstName}</p>
+          <p>Username: {user.username}</p>
+          <p>Email: {user.email}</p>
+          <p>Bio: {user.bio}</p>
+        </div>
+        <div>
+          <Link to="/home">
+            <p>Back to Home</p>
+          </Link>
+        </div>
       </div>
     );
   }
