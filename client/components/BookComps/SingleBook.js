@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { connect, useSelector } from "react-redux";
 import { fetchBook } from "../../store/book";
 import Reviews from "../Reviews";
@@ -13,6 +14,7 @@ export class SingleBook extends React.Component {
   }
   render() {
     const book = this.props.book || {};
+    // let { review } = this.props || [];
     return (
       <div>
         <h2>Single Book Info</h2>
@@ -22,9 +24,14 @@ export class SingleBook extends React.Component {
           <p>{book.published_date}</p>
           <p>{book.description}</p>
         </div>
+
         <div>
-          <p>Reviews</p>
-          <Reviews />
+          <Link to="/books">
+            <p>Back to Home</p>
+          </Link>
+        </div>
+        <div>
+          <Reviews book={book.id} />
         </div>
       </div>
     );

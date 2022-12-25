@@ -7,11 +7,12 @@ export class Reviews extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchReview(this.props.match.params.id);
+    // this.props.fetchReview(this.props.book.id);
   }
 
   render() {
     const review = this.props.review || {};
+    let { book } = this.props || {};
     return (
       <div>
         <h3>Reviews</h3>

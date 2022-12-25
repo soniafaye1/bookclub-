@@ -22,5 +22,7 @@ module.exports = {
     User,
     Book,
     Review,
+    userBook,
+    bookReview,
   },
 };

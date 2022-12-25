@@ -1,10 +1,14 @@
 .bookBox{
-    position: absolute;
+    display: flex;
     width: 200px;
-    height: 238px;
-    left: 154px;
-    top: 745px;
-}
+    border-color: slateblue;
+    border-width: 2px;
+    border-style: solid;
+    height: 50px;
+    /* margin: 5px; */
+    /* align-items: center; */
+  }
+
 
 .subtitle{
     position: absolute;
