@@ -6,20 +6,18 @@ const Book = db.define("book", {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  published_date: {
-    type: Sequelize.STRING,
-  },
   description: {
-    type: Sequelize.TEXT,
-  },
-  contributer: {
     type: Sequelize.STRING,
   },
   author: {
     type: Sequelize.STRING,
   },
-  publisher: {
-    type: Sequelize.STRING,
+  imageUrl: {
+    type: Sequelize.TEXT,
+    defaultValue: "Gala_AC.png",
+    validate: {
+      notEmpty: true,
+    },
   },
 });
 

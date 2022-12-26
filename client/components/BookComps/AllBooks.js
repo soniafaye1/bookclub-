@@ -22,6 +22,7 @@ export class AllBooks extends React.Component {
             <div className="bookBox" key={idx}>
               <Link to={`/books/${book.id}`}>
                 <p className="bookTitle">{book.title}</p>
+                <img src={book.imageUrl} width={200} height={200} />
               </Link>
             </div>
           );

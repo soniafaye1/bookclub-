@@ -1,5 +1,6 @@
 "use strict";
 
+const { default: axios } = require("axios");
 const {
   db,
   models: { User, Book, Review, UserBook },
@@ -30,51 +31,61 @@ async function seed() {
     }),
   ]);
 
+  async function fetchBooks() {
+    const { data } = await axios.get(
+      "https://api.nytimes.com/svc/books/v3//lists/full-overview.json?api-key=dwKZYZeeJYARrB1wCSRakHZOy5w1lnS9"
+    );
+    return data;
+  }
+
+  async function mapBooks() {
+    const bookArray = await fetchBooks();
+    let bookList = bookArray.results.lists;
+
+    for (let i = 0; i < 5; i++) {
+      let newBookList = bookList[i].books;
+      await Promise.all([
+        Book.create({
+          title: newBookList[i]["title"],
+          author: newBookList[i]["author"],
+          description: newBookList[i]["description"],
+          imageUrl: newBookList[i]["book_image"],
+        }),
+      ]);
+    }
+  }
+
+  await mapBooks();
+
   const [book1, book2, book3, book4, book5] = await Promise.all([
     Book.create({
       title: "Wuthering Heights",
-      published_date: "1847",
-      description:
-        "Wuthering Heights is an 1847 novel by Emily Brontë, initially published under the pseudonym Ellis Bell. It concerns two families of the landed gentry living on the West Yorkshire moors, the Earnshaws and the Lintons, and their turbulent relationships with Earnshaw's adopted son, Heathcliff. The novel was influenced by Romanticism and Gothic fiction.",
-      contributer: "",
+      description: "Wuthering Heights is an 1847 novel by Emily Brontë.",
       author: "Emily Brontë",
-      publisher: " Nelson Doubleday",
     }),
     Book.create({
       title: "Ethan Frome",
-      published_date: "2015",
       description:
-        "Ethan Frome toils at his New England farm while struggling to maintain a bearable existence with his sickly and judgemental wife, Zeena. He finds himself increasingly drawn to Mattie, Zeena's cousin, who helps around the house. Although she represents the possibility of happiness, they are trapped by their hopeless situation. And when Zeena becomes suspicious and arranges for Mattie to be sent away, events take a tragic turn. This heart-breaking portrait, from the author of The House of Mirth, is an intimate look at choices not made and lives not yet lived. First published in 1911 and adapted for film, Ethan Frome remains for many the most subtle and moving of Wharton's works.",
-      contributer: "Edith Wharton",
+        "Ethan Frome toils at his New England farm while struggling to maintain a bearable existence.",
       author: "Edith Wharton",
-      publisher: "Collins Classics",
     }),
     Book.create({
       title: "Importance of Being Earnest",
-      published_date: "1990",
       description:
-        "Set in England during the late Victorian era, the play's humour derives in part from characters maintaining fictitious identities to escape unwelcome social obligations. It is replete with witty dialogue and satirises some of the foibles and hypocrisy of late Victorian society. It has proved Wilde's most enduringly popular play.",
-      contributer: "Oscar Wilde",
+        "Set in England during the late Victorian era, the play's humour derives in part from characters maintaining fictitious identities.",
       author: "Oscar Wilde",
-      publisher: "Dover Publications",
     }),
     Book.create({
       title: "Anna Karénina",
-      published_date: "1954",
       description:
-        "Anna Karenina tells of the doomed love affair between the sensuous and rebellious Anna and the dashing officer, Count Vronsky. Tragedy unfolds as Anna rejects her passionless marriage and must endure the hypocrisies of society. Set against a vast and richly textured canvas of nineteenth-century Russia, the novel's seven major characters create a dynamic imbalance, playing out the contrasts of city and country life and all the variations on love and family happiness. While previous versions have softened the robust, and sometimes shocking, quality of Tolstoy's writing, Pevear and Volokhonsky have produced a translation true to his powerful voice. This award-winning team's authoritative edition also includes an illuminating introduction and explanatory notes. Beautiful, vigorous, and eminently readable, this Anna Karenina will be the definitive text for generations to come.",
-      contributer: "Lev Nikolaevič Tolstoy",
+        "Anna Karenina tells of the doomed love affair between the sensuous and rebellious Anna and the dashing officer, Count Vronsky.",
       author: "Lev Nikolaevič Tolstoy",
-      publisher: "Penguin Books",
     }),
     Book.create({
       title: "Cyrano de Bergerac",
-      published_date: "",
       description:
-        "Cyrano de Bergerac, verse drama in five acts by Edmond Rostand, performed in 1897 and published the following year. It was based only nominally on the 17th-century nobleman of the same name, known for his bold adventures and large nose.Set in 17th-century Paris, the action revolves around the emotional problems of the noble, swashbuckling Cyrano, who, despite his many gifts, feels that no woman can ever love him because he has an enormous nose. Secretly in love with the lovely Roxane, Cyrano agrees to help his inarticulate rival, Christian, win her heart by allowing him to present Cyrano’s love poems, speeches, and letters as his own work. Eventually Christian recognizes that Roxane loves him for Cyrano’s qualities, not his own, and he asks Cyrano to confess his identity to Roxane; Christian then goes off to a battle that proves fatal. Cyrano remains silent about his own part in Roxane’s courtship. As he is dying years later, he visits Roxane and recites one of the love letters. Roxane realizes that it is Cyrano she loves, and he dies content.",
-      contributer: "",
+        "Cyrano de Bergerac, verse drama in five acts by Edmond Rostand.",
       author: "Edmond Rostand",
-      publisher: "Penguin Books",
     }),
   ]);
 
